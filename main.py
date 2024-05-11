@@ -11,7 +11,7 @@ TOKEN: Final[str] = str(os.getenv('DISCORD_TOKEN'))
 # BOT SETUP
 intents: Intents = Intents.default()
 intents.message_content = True
-client: Client = Client(intents=intents)
+client: Client = Client(intents = intents)
 
 # MESSAGE FUNCTIONS
 async def send_message(message: Message, user_messsage: str) -> None:

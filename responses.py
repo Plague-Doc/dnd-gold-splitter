@@ -15,8 +15,8 @@ Accepted coin types: gp, sp, cp (gold, silver, copper)
 Example inputs:
 `!split 4 25gp 96sp 21cp`  `!split 5 2gp 3cp`  `!split 2 8sp 16sp`"""
     
-    elif int(input[1]) == 0:
-        return "Cannot devide by 0."
+    elif input[1] == "0":
+        return "Cannot divide by 0."
 
     else:
         try:
@@ -24,7 +24,6 @@ Example inputs:
             total_silver: int = 0
             total_gold: int = 0
             leftover_copper: int = 0
-            error_thrown: bool = False
 
             for x in range(2, len(input)):
                 if input[x][len(input[x]) - 2:] == "gp":
@@ -33,6 +32,8 @@ Example inputs:
                     total_copper += int(input[x][:len(input[x]) - 2]) * 10
                 elif input[x][len(input[x]) - 2:] == "cp":
                     total_copper += int(input[x][:len(input[x]) - 2])
+                else:
+                    raise Exception("Invalid money type.")
 
             leftover_copper = total_copper % int(input[1])
             total_copper -= leftover_copper
@@ -49,29 +50,25 @@ Example inputs:
             total_copper = int(total_copper)
 
         except Exception as e:
-            error_thrown = True
             print(f"[DEBUG] {e}")
+            return "Invalid input, try `!split help`"
 
-        if error_thrown == False:
-            output_string: str = f"Per person:"
+        output_string: str = f"Per person:"
+        if total_gold >= 1:
+            output_string += f" `{total_gold}gp`"
 
-            if total_gold >= 1:
-                output_string += f" `{total_gold}gp`"
+        if total_silver >= 1:
+            output_string += f" `{total_silver}sp`"
 
-            if total_silver >= 1:
-                output_string += f" `{total_silver}sp`"
+        if total_copper >= 1:
+            output_string += f" `{total_copper}cp`"
 
-            if total_copper >= 1:
-                output_string += f" `{total_copper}cp`"
+        if total_gold < 1 and total_silver < 1 and total_copper < 1:
+            output_string = "Indivisible equally :("
+        elif leftover_copper >= 1:
+            output_string += f"\nCopper left behind: `{leftover_copper}`"
 
-            if total_gold < 1 and total_silver < 1 and total_copper < 1:
-                output_string = "Indivisible equally :("
-            elif leftover_copper >= 1:
-                output_string += f"\nCopper left behind: `{leftover_copper}`"
-
-            return output_string
-
-    return "Invalid input, try `!split help`"
+        return output_string
  
 # FOR TESTING
 if __name__ == '__main__':
