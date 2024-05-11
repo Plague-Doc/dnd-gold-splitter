@@ -1,6 +1,6 @@
 # DnD Gold Splitter
 This is a Discord bot made to specifically split found coins equally between any number of players in a DnD game.
-After being added to a server, it takes in text from any channel specifically starting with the `!split` command, then followed by parameters split with a space.
+After being added to a server, it takes in text from any channel specifically starting with the `!split` command, then followed by parameters separated by a space.
 
 ## Available commands
 * `!split ping` - Returns "Pong!" as a simple latency test.<br/>
