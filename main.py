@@ -16,7 +16,7 @@ client: Client = Client(intents = intents)
 # MESSAGE FUNCTIONS
 async def send_message(message: Message, user_messsage: str) -> None:
     if not user_messsage:
-        print("Empty message, fucked up intents")
+        print("Invalid Intents.")
         return
     
     if user_messsage.split()[0] != "!split" and user_messsage.split()[0] != "/split":
